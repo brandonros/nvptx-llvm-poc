@@ -3,6 +3,8 @@
 #![feature(abi_ptx)]
 #![feature(core_intrinsics)]
 
+extern crate linked_list_allocator;
+
 use linked_list_allocator::LockedHeap;
 
 #[global_allocator]

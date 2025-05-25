@@ -1,6 +1,6 @@
 #include <cuda.h>
 #include <stdio.h>
-#include "output/ptx_code.h"
+#include "../output/ptx_code.h"
 
 int main() {
     CUdevice device;

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if ! which llc >/dev/null 2>&1; then
-  apt install -y llvm
+  apt install -y llvm-19
 fi
 
 
