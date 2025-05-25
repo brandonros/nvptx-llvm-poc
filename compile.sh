@@ -2,6 +2,7 @@
 
 . $HOME/.cargo/env
 
+# Clean up
 rm -rf output/
 mkdir -p output/
 
@@ -11,7 +12,7 @@ cargo +nightly build --release --target nvptx64-nvidia-cuda
 popd
 
 # Find the generated .ll file (cargo puts it in a nested directory)
-find kernel/target/nvptx64-nvidia-cuda/release/deps -name "*.ll" -exec cp {} output/kernel.ll \;
+find kernel/target/nvptx64-nvidia-cuda/release/deps -name "kernel.ll" -exec cp {} output/kernel.ll \;
 
 # Convert .ll to .ptx
 llc -march=nvptx64 -mcpu=sm_75 output/kernel.ll -o output/kernel.ptx
