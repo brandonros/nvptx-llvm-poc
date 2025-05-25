@@ -24,6 +24,8 @@ use owning_ref::StableAddress;
 #[cfg(feature = "serde")]
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
+use crate::defer;
+
 /// Basic operations for a reader-writer lock.
 ///
 /// Types implementing this trait can be used by `RwLock` to form a safe and

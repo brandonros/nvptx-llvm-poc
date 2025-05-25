@@ -255,7 +255,7 @@ impl Strategy for OnSuccess {
 #[macro_export]
 macro_rules! defer {
     ($($t:tt)*) => {
-        let _guard = $crate::guard((), |()| { $($t)* });
+        let _guard = crate::scopeguard::guard((), |()| { $($t)* });
     };
 }
 

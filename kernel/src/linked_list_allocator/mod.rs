@@ -21,7 +21,7 @@ use core::ptr::NonNull;
 use hole::Hole;
 use hole::HoleList;
 #[cfg(feature = "use_spin")]
-use spinning_top::Spinlock;
+use crate::spinning_top::Spinlock;
 
 pub mod hole;
 #[cfg(test)]

@@ -56,7 +56,6 @@
 #![warn(missing_debug_implementations)]
 
 /// The spinlock implemenation is based on the abstractions provided by the `lock_api` crate.
-pub use lock_api;
 
 pub use rw_spinlock::{BackoffRwSpinlock, RawRwSpinlock, RwSpinlock};
 pub use spinlock::{BackoffSpinlock, RawSpinlock, Spinlock};

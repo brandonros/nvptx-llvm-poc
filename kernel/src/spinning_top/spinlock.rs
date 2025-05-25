@@ -5,7 +5,7 @@
 
 use core::marker::PhantomData;
 use core::sync::atomic::{AtomicBool, Ordering};
-use crate::lock_api::{GuardSend, RawMutex};
+use crate::lock_api::{self, GuardSend, RawMutex};
 
 use super::relax::{Backoff, Relax, Spin};
 

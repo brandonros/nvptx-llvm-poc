@@ -5,10 +5,7 @@
 // http://opensource.org/licenses/MIT>, at your option. This file may not be
 // copied, modified, or distributed except according to those terms.
 
-use crate::{
-    mutex::{RawMutex, RawMutexFair, RawMutexTimed},
-    GuardNoSend,
-};
+use super::{RawMutex, RawMutexFair, RawMutexTimed, GuardNoSend};
 use core::{
     cell::{Cell, UnsafeCell},
     fmt,
@@ -18,6 +15,7 @@ use core::{
     ops::Deref,
     sync::atomic::{AtomicUsize, Ordering},
 };
+use crate::defer;
 
 #[cfg(feature = "arc_lock")]
 use alloc::sync::Arc;

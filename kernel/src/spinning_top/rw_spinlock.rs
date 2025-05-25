@@ -2,8 +2,7 @@ use core::marker::PhantomData;
 use core::sync::atomic::{AtomicUsize, Ordering};
 
 use crate::lock_api::{
-    GuardSend, RawRwLock, RawRwLockDowngrade, RawRwLockRecursive, RawRwLockUpgrade,
-    RawRwLockUpgradeDowngrade,
+    self, GuardSend, RawRwLock, RawRwLockDowngrade, RawRwLockRecursive, RawRwLockUpgrade, RawRwLockUpgradeDowngrade
 };
 
 use super::relax::{Backoff, Relax, Spin};

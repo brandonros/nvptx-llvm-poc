@@ -1,5 +1,6 @@
 #![no_std]
 #![no_main]
+#![allow(warnings)]
 #![feature(abi_ptx)]
 #![feature(core_intrinsics)]
 
@@ -27,7 +28,8 @@ pub extern "ptx-kernel" fn add(result: *mut i32, a: i32, b: i32) {
 
 #[unsafe(no_mangle)]
 pub extern "ptx-kernel" fn ed25519_poc() {
-    let mut _input = [0u8; 32];
+    let mut input = [0u8; 32];
+    input[0] = 0x22;
     // TODO: use a real private key
     let scalar = curve25519_dalek::Scalar::from_bytes_mod_order(input);
     let point = curve25519_dalek::constants::ED25519_BASEPOINT_TABLE * &scalar;
