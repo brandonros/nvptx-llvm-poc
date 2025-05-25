@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 . $HOME/.cargo/env
 
 # Clean up
@@ -8,6 +10,7 @@ mkdir -p output/
 
 # Build with cargo
 pushd kernel
+cargo clean
 cargo +nightly build --release --target nvptx64-nvidia-cuda
 popd
 
