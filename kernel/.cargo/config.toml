@@ -2,4 +2,11 @@
 target="nvptx64-nvidia-cuda"
 
 [target.nvptx64-nvidia-cuda]
-rustflags = ["-C", "target-cpu=sm_75", "--emit=llvm-ir", "-C", "linker=true"]
+rustflags = [
+    "-C", "target-cpu=sm_75",
+    "--emit=llvm-ir",
+    "-C", "linker=true",
+    "-C", "prefer-dynamic=no",
+    "-C", "embed-bitcode=yes",
+    "-Z", "merge-functions=disabled"
+]
