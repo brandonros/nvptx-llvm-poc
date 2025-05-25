@@ -3,7 +3,10 @@
 #![feature(abi_ptx)]
 #![feature(core_intrinsics)]
 
-extern crate linked_list_allocator;
+mod scopeguard;
+mod lock_api;
+mod spinning_top;
+mod linked_list_allocator;
 
 use linked_list_allocator::LockedHeap;
 
@@ -24,7 +27,7 @@ pub extern "ptx-kernel" fn add(result: *mut i32, a: i32, b: i32) {
 
 #[unsafe(no_mangle)]
 pub extern "ptx-kernel" fn ed25519_poc() {
-    let mut input = [0u8; 32];
+    let mut _input = [0u8; 32];
     // TODO: use a real private key
     let scalar = curve25519_dalek::Scalar::from_bytes_mod_order(input);
     let point = curve25519_dalek::constants::ED25519_BASEPOINT_TABLE * &scalar;
@@ -37,5 +40,5 @@ pub extern "ptx-kernel" fn ed25519_poc() {
     let x_is_negative = x_bytes[0] & 1;
     s[31] ^= x_is_negative << 7;
     let compressed_point = curve25519_dalek::edwards::CompressedEdwardsY(s);
-    let public_key_bytes = compressed_point.to_bytes();
+    let _public_key_bytes = compressed_point.to_bytes();
 }

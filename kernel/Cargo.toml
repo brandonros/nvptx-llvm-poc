@@ -13,6 +13,17 @@ lto = "fat"
 codegen-units = 1
 strip = "symbols"
 
+[features]
+default = ["use_spin", "atomic_usize"]
+use_spin = []
+# deprecated - use `use_spin` instead
+use_spin_nightly = ["use_spin"]
+alloc_ref = []
+# deprecated - no effect
+const_mut_refs = []
+nightly = []
+arc_lock = []
+atomic_usize = []
+
 [dependencies]
-linked_list_allocator = { version = "0.10" }
 curve25519-dalek = { git = "https://github.com/brandonros/curve25519-dalek", rev = "e7ba30033893602d98d250184b174574665ff545", default-features = false, features = ["alloc", "precomputed-tables"] }
