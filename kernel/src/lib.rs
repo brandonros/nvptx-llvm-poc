@@ -4,15 +4,28 @@
 #![feature(abi_ptx)]
 #![feature(core_intrinsics)]
 
-mod scopeguard;
-mod lock_api;
-mod spinning_top;
-mod linked_list_allocator;
+use core::{alloc::{GlobalAlloc, Layout}, ffi::c_void};
 
-use linked_list_allocator::LockedHeap;
+unsafe extern "C" {
+    // implicitly defined by cuda.
+    pub fn malloc(size: usize) -> *mut c_void;
+
+    pub fn free(ptr: *mut c_void);
+}
+
+pub struct CUDAAllocator;
+
+unsafe impl GlobalAlloc for CUDAAllocator {
+    unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
+        malloc(layout.size()) as *mut u8
+    }
+    unsafe fn dealloc(&self, ptr: *mut u8, _layout: Layout) {
+        free(ptr as *mut _);
+    }
+}
 
 #[global_allocator]
-static ALLOCATOR: LockedHeap = LockedHeap::empty();
+pub static GLOBAL_ALLOCATOR: CUDAAllocator = CUDAAllocator;
 
 #[panic_handler]
 fn panic(_: &core::panic::PanicInfo) -> ! {
